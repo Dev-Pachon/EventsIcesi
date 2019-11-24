@@ -57,13 +57,13 @@ public class University{
 	}
 	/**
 	 * This method checks if the event was created before, and if it wasn't then create the event 
-	 * @param name
-	 * @param startDate
-	 * @param finalDate
-	 * @param teacher
-	 * @param faculty
-	 * @param NumAuditoriums
-	 * @return
+	 * @param name is a string with the events name, name != null
+	 * @param startDate is a LocalDateTime object that contains the date and the hour of start of the event, startDate != null, startDate needs to be a LocalDateTime object  
+	 * @param finalDate is a LocalDateTime object that contains the date and the hour of end of the event, startDate != null, finalDate needs to be a LocalDateTime object
+	 * @param teacher is a string that contains the name of the teacher
+	 * @param faculty is a string that contains the name of the faculty
+	 * @param NumAuditoriums is a array with the indicator of the auditoriums that the event will use
+	 * @return a string that indicates if the event was created or not
 	 */
 	public String addEvent(String name, LocalDateTime startDate, LocalDateTime finalDate, String teacher, String faculty, int NumAuditoriums[]){
 		
@@ -88,7 +88,13 @@ public class University{
 		
 		return msj;
 	}
-	
+	/**
+	 * This method use the name of a event to erase the event</br>
+	 * <p>Pre:</p> The arrayList events need to be created before</br>
+	 * <P>Post:</p> The Event object corresponding to the name will erased to the arrayList 
+	 * @param name is a string with the name of the event
+	 * @return a string indicating if the event was erased correctly or not
+	 */
 	public String eraseEvent(String name){
 		String msj = "The event doesn't exist";
 			boolean erased = false;
@@ -101,7 +107,11 @@ public class University{
 			}
 		return msj;
 	}
-
+	/**
+	 * This method put in a string the information of the events in the next 5 days
+	 * <p>Pre:</p> The arrayList events need to be created before</br>
+	 * @return a string with the information of the events
+	 */
 	public String showEventsNextFiveDays() {
 		String msj = (events.isEmpty()) ? "Don't are events": "";
 		LocalDateTime dateNow = LocalDateTime.now();
@@ -116,10 +126,23 @@ public class University{
 		return msj;
 	}
 	
+	/**
+	 * This method calls another method of the auditorium to continue with the request
+	 * <p>Pre:</p> The array auditoriums need to be created before, auditoriums != null
+	 * @param auditorium is a integer that indicates the auditorium
+	 * @param rows is a integer that indicates the number of rows
+	 * @param maxColums is a integer that indicates the maximum number of columns
+	 * @param colums is a array that contains the number of chairs per row
+	 */
 	public void createChair(int auditorium, int rows, int maxColums, int []colums) {
 		auditoriums[auditorium].createChairs(rows, maxColums, colums);
 	}
 	
+	/**
+	 * This method returns a string with the auditoriums in the university
+	 * <p>Pre:</p> The array auditoriums need to be created before, auditoriums != null
+	 * @return a string with the number and the name of the auditoriums in the university
+	 */
 	public String showAuditoriums() {
 		String msj = "";
 		
@@ -129,7 +152,15 @@ public class University{
 		
 	return msj;
 	}
-	
+	/**
+	 * This method calls another method in Auditorium that continues with the request
+	 * <p>Pre:</p> The array auditoriums need to be created before, auditoriums != null
+	 * @param auditorium is a integer that indicates the auditorium 
+	 * @param row is a char that indicates the row
+	 * @param chair is a integer that indicates the defective chair in the row
+	 * @param description is a string that contains the description about the defective chair
+	 * @return a string indicating if the chair was reported correctly or not
+	 */
 	public String reportDefectiveChair(int auditorium, char row, int chair, String description) {
 		String msj = "";
 		
@@ -137,7 +168,15 @@ public class University{
 		
 		return msj;
 	}
-	
+	/**
+	 * This method checks if exist another event that could stay in the time range of the actual event</br>
+	 * <p>Pre:</p> The array auditoriums need to be created before, auditoriums != null</br>
+	 * <p>Pre:</p> The arrayList events need to be created before</br>
+	 * @param NumAuditoriums is a integer that contains a indication of the auditoriums that the event will use
+	 * @param startDate is a LocalDateTime object that contains the date and the hour of start of the event, startDate != null, startDate needs to be a LocalDateTime object  
+	 * @param finalDate is a LocalDateTime object that contains the date and the hour of end of the event, startDate != null, finalDate needs to be a LocalDateTime object
+	 * @return a boolean that returns true if the range of time is available, or false if another event is in the range
+	 */
 	public boolean checkHour(int[] NumAuditoriums, LocalDateTime startDate, LocalDateTime finalDate) {
 		Auditorium auditoriums[] = new Auditorium[NumAuditoriums.length];
 		for(int i = 0; i < NumAuditoriums.length; i++) {
@@ -170,7 +209,12 @@ public class University{
 		
 		return bool;
 	}
-	
+	/**
+	 * This method calls another method in auditorium that continues with the request
+	 * <p>Pre:</p> The array auditoriums need to be created before, auditoriums != null</br>
+	 * @param auditorium is a integer that indicates the auditorium
+	 * @return a string with the percentage of defective chair in the auditorium
+	 */
 	public String calculatePercentageDefectiveChairs(int auditorium) {
 		return auditoriums[auditorium].calculatePercentageDefectiveChairs();
 	}

@@ -43,10 +43,10 @@ public class Auditorium{
 	//Methods
 	
 	/**
-	 * 
-	 * @param rows
-	 * @param maxColums
-	 * @param colums
+	 * This method create a matriz of chairs depending of the number of rows and the number of chairs per row, the rows where are  
+	 * @param rows is a integer that indicates the number of rows
+	 * @param maxColums is a integer that indicates the maximum number of columns
+	 * @param colums is a array with the number of chairs per row
 	 */
 	public void createChairs(int rows, int maxColums, int [] colums) {
 		chairs = new Chair[rows][maxColums];
@@ -64,11 +64,12 @@ public class Auditorium{
 		}
 	}
 	/**
-	 * 
-	 * @param row
-	 * @param chair
-	 * @param description
-	 * @return
+	 * This method set the status of a chair to defective, and set a description about the defective chair</br>
+	 * <p>Pre:</p> The array nameRows and the matriz chairs need to was created before, nameRows&&chairs != null 
+	 * @param row is a char that indicates a row in the auditorium
+	 * @param chair is a integer that indicates the defective chair in the row
+	 * @param description is a string that contains the description about the defective chair
+	 * @return a string that indicates if the chair was reported correctly or not
 	 */
 	public String reportDefectiveChair(char row, int chair, String description) {
 		String msj = "Invalid Chair";
@@ -86,8 +87,9 @@ public class Auditorium{
 		return msj;
 	}
 	/**
-	 * 
-	 * @return
+	 * This method calculate the percentage of defective chairs in the auditorium</br> 
+	 * <b>Pre:</b> the matriz chairs need to was created before, chairs != null
+	 * @return a string that indicates the percentage of defective chairs in the auditorium 
 	 */
 	public String calculatePercentageDefectiveChairs() {
 		String msj = "";
@@ -105,8 +107,11 @@ public class Auditorium{
 			}
 		}
 		
+		if(numChairs!=0) {
 		msj = "The percentage of defective chairs is: "+((numChairsDefective/numChairs)*100)+"%";
-		
+		}else {
+		msj = "Don't are any chair in the auditorium";
+		}
 	return msj;
 	}
 	
